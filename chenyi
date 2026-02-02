@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWAG 「沂派胡言」活動網頁</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@900&family=Oswald:wght@700&display=swap');
+        
+        body { background-color: #050505; color: #ffffff; overflow-x: hidden; font-family: 'Noto Sans TC', sans-serif; }
+        
+        /* 標題特效 - 增加緩衝避免切字 */
+        .title-discussion {
+            background: linear-gradient(90deg, #ff007f, #ffffff, #ff007f);
+            background-size: 200% auto; 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            animation: shine-discussion 3s linear infinite; 
+            display: inline-block;
+            padding: 0 0.25em; 
+            overflow: visible;
+            line-height: 1.4;
+        }
+        @keyframes shine-discussion { to { background-position: 200% center; } }
+
+        .title-clinic {
+            color: #fff; text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+            animation: clinic-glow 2s ease-in-out infinite alternate; 
+            display: inline-block;
+            padding: 0 0.1em;
+        }
+        @keyframes clinic-glow {
+            from { text-shadow: 0 0 10px #ffd700; transform: skewX(-2deg); }
+            to { text-shadow: 0 0 30px #ff8c00; transform: skewX(2deg); }
+        }
+
+        /* 🚀 區塊背景與 Hover 效果 */
+        .bg-event-1 {
+            background: radial-gradient(circle at top, #220512 0%, #050505 100%);
+            border-top: 1px solid rgba(255, 0, 127, 0.2);
+            transition: background 0.8s ease;
+        }
+        .bg-event-1:hover { background: radial-gradient(circle at top, #3a0a1f 0%, #080205 100%); }
+
+        .bg-event-2 {
+            background: radial-gradient(circle at top, #1a1408 0%, #050505 100%);
+            border-top: 1px solid rgba(255, 215, 0, 0.15);
+            transition: background 0.8s ease;
+        }
+        .bg-event-2:hover { background: radial-gradient(circle at top, #2d220d 0%, #0a0802 100%); }
+
+        /* 🚀 卡片佈局與對齊 */
+        .topic-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .topic-card.active { opacity: 1; transform: translateY(0); }
+        .topic-card:hover {
+            border-color: rgba(255, 0, 127, 0.6);
+            box-shadow: 0 10px 30px rgba(255, 0, 127, 0.2);
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        .vote-container { margin-top: auto; }
+
+        /* 通用元件 */
+        .swag-gradient { background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); }
+        .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
+        .neon-text { animation: flicker 3s infinite alternate; }
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 42px #ff007f, 0 0 82px #ff007f; }
+            20%, 24%, 55% { text-shadow: none; }
+        }
+        .glitch { animation: glitch 500ms infinite; }
+        @keyframes glitch {
+            0% { text-shadow: 0.05em 0 0 #ff007f, -0.05em -0.025em 0 #7b2ff7; }
+            100% { text-shadow: -0.025em 0 0 #ff007f, -0.025em -0.05em 0 #00ffff; }
+        }
+        .card-glass { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .img-mask { -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
+        .float-icon { animation: float 3s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-10px); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-center px-4 pt-10">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl opacity-40 z-0">
+            <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/%E9%99%B3%E6%B2%82%E7%94%9F%E6%B4%BB%E7%85%A703.jpg" alt="陳沂" class="w-full h-auto img-mask object-cover inline-block" onerror="this.src='https://images.unsplash.com/photo-1550745674-71235958745c?q=80&w=1000';">
+        </div>
+        <div class="relative z-10">
+            <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-10 mx-auto mb-6">
+            <h1 class="font-title text-7xl md:text-[11rem] font-black leading-none mb-8 italic tracking-tighter">
+                <span class="neon-text text-white">沂派</span><span class="glitch">胡言</span>
+            </h1>
+            <div class="flex flex-col items-center gap-6">
+                <div class="bg-white text-black px-6 py-2 font-bold transform skew-x-[-12deg] shadow-[5px_5px_0px_#ff007f]">2 / 26 陳沂正式迴歸</div>
+                <p class="text-xl md:text-2xl font-bold tracking-[0.3em] text-white">每週四晚間九點 <span class="text-pink-500 border-b-2 border-pink-500">準時開播</span></p>
+                
+                <div class="flex flex-col md:flex-row gap-4 mt-4 w-full max-w-xl px-4">
+                    <a href="https://swag.live/user/662a4f253a7fe8f3ff7f95f2" target="_blank" class="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-pink-600 hover:bg-pink-500 transition-all font-black text-white shadow-lg text-lg">
+                        <i class="fas fa-heart"></i> 追蹤不錯過開播
+                    </a>
+                    <button onclick="addToCalendar()" class="flex-1 flex items-center justify-center gap-2 py-4 px-6 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all font-black text-white shadow-lg text-lg">
+                        <i class="fab fa-google"></i> 加入行事曆
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="event1" class="relative py-32 bg-event-1 cursor-default">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="inline-block border border-pink-500 text-pink-500 px-6 py-1 rounded-full text-sm font-black mb-6 uppercase tracking-widest">活動 1</div>
+            <div class="mb-4">
+                <h2 class="title-discussion text-5xl md:text-6xl font-black italic">本週熱門討論話題</h2>
+            </div>
+            <p class="text-gray-300 text-sm md:text-base mb-16 max-w-3xl mx-auto leading-relaxed">
+                本週話題陳沂將在直播中親自開撕！快來投下你的真心話，陳沂陪你線上開戰。<br class="hidden md:block">
+                參與投票意見並留下 SWAG ID，週週加碼抽 <span class="text-pink-500 font-bold border-b border-pink-500">3 位贈送 1000 鑽</span>（每週五前抽出並完成派鑽）
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8 text-left items-stretch">
+                <div class="topic-card card-glass p-8 rounded-[2.5rem] border-white/10">
+                    <h3 class="text-xl font-bold mb-4 topic-title">1. 365元鹽酥雞貴嗎？</h3>
+                    <p class="text-gray-500 text-sm mb-8 leading-relaxed">Dcard 熱議：請客點了 365 元鹽酥雞被抱怨。是拜金還是小氣？</p>
+                    <div class="vote-container">
+                        <div id="vote-ui-1" class="space-y-3">
+                            <button onclick="triggerVote(1, '根本拜金女')" class="w-full py-3 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold">根本拜金女</button>
+                            <button onclick="triggerVote(1, '男的有夠小氣')" class="w-full py-3 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold">男的有夠小氣</button>
+                        </div>
+                        <div id="res-1" class="hidden animate-pulse">
+                            <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[65%]"></div></div>
+                            <div class="flex justify-between mt-2 font-bold text-pink-400 text-sm"><span>拜金 65%</span><span>小氣 35%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-card card-glass p-8 rounded-[2.5rem] border-white/10">
+                    <h3 class="text-xl font-bold mb-4 topic-title">2. 努力存錢 vs 及時行樂</h3>
+                    <p class="text-gray-500 text-sm mb-8 leading-relaxed">Threads 激辯：趁年輕花錢享受，還是存錢防老？你的選擇是？</p>
+                    <div class="vote-container">
+                        <div id="vote-ui-2" class="space-y-3">
+                            <button onclick="triggerVote(2, '不存錢等於自殺')" class="w-full py-3 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold">不存錢等於自殺</button>
+                            <button onclick="triggerVote(2, '存到死也沒用')" class="w-full py-3 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold">存到死也沒用</button>
+                        </div>
+                        <div id="res-2" class="hidden animate-pulse">
+                            <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[40%]"></div></div>
+                            <div class="flex justify-between mt-2 font-bold text-pink-400 text-sm"><span>存錢 40%</span><span>享樂 60%</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="topic-card card-glass p-8 rounded-[2.5rem] border-white/10">
+                    <h3 class="text-xl font-bold mb-4 topic-title">3. 外遇該被無限檢視嗎？</h3>
+                    <p class="text-gray-500 text-sm mb-8 leading-relaxed">公眾人物外遇是私事還是活該被檢視？兩大論戰你站哪一邊？</p>
+                    <div class="vote-container">
+                        <div id="vote-ui-3" class="space-y-3">
+                            <button onclick="triggerVote(3, '關我屁事')" class="w-full py-3 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold">關我屁事</button>
+                            <button onclick="triggerVote(3, '應被檢視')" class="w-full py-3 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold">應被檢視</button>
+                        </div>
+                        <div id="res-3" class="hidden animate-pulse">
+                            <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[45%]"></div></div>
+                            <div class="flex justify-between mt-2 font-bold text-pink-400 text-sm"><span>無視 45%</span><span>檢視 55%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="event2" class="relative py-32 bg-event-2 text-center overflow-hidden cursor-default">
+        <i class="fas fa-envelope-open-text absolute top-20 left-10 text-orange-400/10 text-6xl float-icon"></i>
+        <i class="fas fa-paper-plane absolute bottom-20 right-10 text-orange-400/10 text-5xl float-icon"></i>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="inline-block border border-orange-400 text-orange-400 px-6 py-1 rounded-full text-sm font-black mb-8 uppercase tracking-widest">活動 2</div>
+            <div class="mb-12"><h2 class="title-clinic text-5xl md:text-7xl font-black italic">陳沂三觀診療室</h2></div>
+            
+            <div class="card-glass p-12 rounded-[3rem] border-orange-400/20 mb-16 relative">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-black border border-orange-400/50 w-12 h-12 rounded-full flex items-center justify-center text-orange-400 text-xl">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <p class="text-gray-300 text-xl md:text-2xl leading-loose italic">
+                    「你有病，我有藥。<br>私訊陳沂寫下你的困擾，直播現場幫你治腦袋。」
+                </p>
+            </div>
+
+            <a href="https://swag.live/chat/697e24355646481dfa12fbe0" target="_blank" class="inline-flex items-center px-12 py-5 rounded-full gold-gradient text-black font-black text-2xl hover:scale-105 transition shadow-2xl">
+                <i class="fas fa-envelope-open-text mr-3"></i> 立即投稿心事
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-black py-10 border-t border-white/5">
+        <div class="flex flex-col items-center justify-center gap-4 text-center px-4">
+            <div class="flex flex-wrap items-center justify-center gap-3">
+                <span class="text-gray-500 text-sm tracking-widest">亞洲最大成人直播平台</span>
+                <img src="SWAG-Logo-White-1200.png" alt="SWAG" class="h-5 opacity-80 inline-block">
+                <span class="text-gray-500 text-sm tracking-widest">限 18 歲以上用戶登錄</span>
+            </div>
+            <p class="text-gray-700 text-[10px] tracking-tighter uppercase">© 2026 SWAG.LIVE ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <div id="modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/95 p-6 text-center">
+        <div class="card-glass p-12 rounded-[2.5rem] w-full max-w-md border-pink-500/50">
+            <h2 class="text-2xl font-black mb-6">參加鑽石抽獎</h2>
+            <p class="text-gray-400 mb-6 italic text-sm">輸入 SWAG ID 即可解鎖本題投票比例</p>
+            <input type="text" id="swid" placeholder="Your SWAG ID" class="w-full bg-black border border-white/10 rounded-2xl px-6 py-4 mb-8 text-white text-center text-xl outline-none focus:border-pink-500">
+            <button id="submitBtn" onclick="closeModalWithResult()" class="w-full swag-gradient py-4 rounded-xl font-black text-xl mb-4 transition-all">送出並看結果</button>
+            <button onclick="toggleModal()" class="text-gray-500 text-sm hover:text-white transition">關閉</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Google 行事曆
+        function addToCalendar() {
+            const title = "陳沂開播中 - 沂派胡言";
+            const details = "SWAG「沂派胡言」每週四晚間九點準時開播！\n直播間連結：https://swag.live/user/662a4f253a7fe8f3ff7f95f2";
+            const now = new Date();
+            const nextThursday = new Date();
+            nextThursday.setDate(now.getDate() + (4 + 7 - now.getDay()) % 7);
+            if (now.getDay() === 4 && now.getHours() >= 21) nextThursday.setDate(nextThursday.getDate() + 7);
+            nextThursday.setHours(21, 0, 0);
+            const startStr = nextThursday.toISOString().replace(/-|:|\.\d\d\d/g, "");
+            nextThursday.setHours(22, 0, 0);
+            const endStr = nextThursday.toISOString().replace(/-|:|\.\d\d\d/g, "");
+            const calendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startStr}/${endStr}&details=${encodeURIComponent(details)}&recur=RRULE:FREQ=WEEKLY;BYDAY=TH&sf=true&output=xml`;
+            window.open(calendarUrl, '_blank');
+        }
+
+        // 2. 滾動動畫
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.topic-card').forEach(card => observer.observe(card));
+
+        // 3. 投票紀錄與 Google Sheets 發送
+        let currentTopic = { id: null, title: "", option: "" };
+
+        function triggerVote(id, optionText) {
+            const card = document.querySelectorAll('.topic-card')[id-1];
+            currentTopic = {
+                id: id,
+                title: card.querySelector('.topic-title').innerText,
+                option: optionText
+            };
+            toggleModal();
+        }
+
+        function toggleModal() {
+            const m = document.getElementById('modal');
+            m.classList.toggle('hidden');
+            m.classList.toggle('flex');
+        }
+
+        function closeModalWithResult() {
+            const swid = document.getElementById('swid').value;
+            if(swid === "") { alert("請填寫 ID 參加抽獎！"); return; }
+            
+            // 🚀 重要：請在此替換成你部署好的 Google Apps Script URL
+            const scriptURL = '你的_GOOGLE_APPS_SCRIPT_URL'; 
+            const submitBtn = document.getElementById('submitBtn');
+            
+            submitBtn.disabled = true;
+            submitBtn.innerText = "紀錄中...";
+
+            // 使用 FormData 傳送多個欄位
+            const formData = new URLSearchParams();
+            formData.append('swagID', swid);
+            formData.append('topic', currentTopic.title);
+            formData.append('option', currentTopic.option);
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            }).then(() => {
+                showFinalResults(swid);
+            }).catch(error => {
+                console.error('Error!', error);
+                showFinalResults(swid); // 報錯也顯示結果，避免使用者體驗中斷
+            });
+        }
+
+        function showFinalResults(swid) {
+            toggleModal();
+            const id = currentTopic.id;
+            document.getElementById('vote-ui-' + id).classList.add('hidden');
+            document.getElementById('res-' + id).classList.remove('hidden');
+            alert(`感謝參與！您的 SWAG ID (${swid}) 已成功紀錄。\n我們將在每週五抽出 1000 鑽幸運兒！`);
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = false;
+            submitBtn.innerText = "送出並看結果";
+            document.getElementById('swid').value = ""; // 清空輸入框
+        }
+    </script>
+</body>
+</html>
