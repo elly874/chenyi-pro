@@ -11,7 +11,7 @@
         
         body { background-color: #050505; color: #ffffff; overflow-x: hidden; font-family: 'Noto Sans TC', sans-serif; }
         
-        /* 1. 標題特效優化 - 確保邊緣不被切到且層次分明 */
+        /* 標題特效優化 */
         .title-discussion {
             background: linear-gradient(90deg, #ff007f, #ffffff, #ff007f);
             background-size: 200% auto; 
@@ -35,7 +35,6 @@
             to { text-shadow: 0 0 30px #ff8c00; transform: skewX(2deg); }
         }
 
-        /* 🚀 區塊背景與對比 */
         .bg-event-1 {
             background: radial-gradient(circle at top, #220512 0%, #050505 100%);
             border-top: 1px solid rgba(255, 0, 127, 0.2);
@@ -47,7 +46,6 @@
             transition: background 0.8s ease;
         }
 
-        /* 🚀 卡片佈局 */
         .topic-card {
             display: flex;
             flex-direction: column;
@@ -60,7 +58,6 @@
 
         .vote-container { margin-top: auto; }
 
-        /* 特效元件 */
         .swag-gradient { background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); }
         .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
         .neon-text { animation: flicker 3s infinite alternate; }
@@ -75,10 +72,9 @@
         }
         .card-glass { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
         
-        /* 圖片遮罩適配：調整漸層讓文字壓在圖片交界處 */
         .img-mask { 
-            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 95%); 
-            mask-image: linear-gradient(to bottom, black 50%, transparent 95%); 
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
+            mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
         }
 
         .float-icon { animation: float 3s ease-in-out infinite; }
@@ -90,16 +86,18 @@
 </head>
 <body>
 
-    <section class="relative min-h-[85vh] md:min-h-screen flex flex-col items-center justify-start overflow-hidden bg-black text-center px-4">
-        <div class="absolute top-0 left-0 w-full h-[70vh] md:h-screen flex justify-center opacity-40 z-0">
+    <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-center px-4">
+        <div class="absolute top-0 left-0 w-full h-[75vh] md:h-screen flex justify-center opacity-40 z-0">
             <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/%E9%99%B3%E6%B2%82%E7%94%9F%E6%B4%BB%E7%85%A703.jpg" 
                  alt="陳沂" class="w-full max-w-6xl h-full md:h-auto img-mask object-cover object-top">
         </div>
         
-        <div class="relative z-10 w-full max-w-5xl pt-16 md:pt-24 lg:pt-32">
-            <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-4 md:mb-6">
+        <div class="relative z-10 w-full max-w-5xl flex flex-col items-center">
+            <div class="h-20 md:h-32 lg:h-40"></div> 
             
-            <h1 class="font-title text-6xl sm:text-8xl md:text-9xl lg:text-[11rem] font-black leading-none mb-6 italic tracking-tight">
+            <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-6">
+            
+            <h1 class="font-title text-5xl sm:text-7xl md:text-9xl lg:text-[11rem] font-black leading-none mb-8 italic tracking-tight">
                 <span class="neon-text text-white">沂派</span><span class="glitch">胡言</span>
             </h1>
             
@@ -107,7 +105,7 @@
                 <div class="bg-white text-black px-4 md:px-6 py-2 font-bold transform skew-x-[-12deg] shadow-[5px_5px_0px_#ff007f] text-xs md:text-lg">
                     話題女王陳沂 2 / 26 正式迴歸
                 </div>
-                <p class="text-base md:text-2xl font-bold tracking-[0.1em] md:tracking-[0.3em] text-white">
+                <p class="text-lg md:text-2xl font-bold tracking-[0.1em] md:tracking-[0.3em] text-white">
                     每週四晚間九點 <span class="text-pink-500 border-b-2 border-pink-500">準時開播</span>
                 </p>
                 
@@ -227,6 +225,7 @@
     </div>
 
     <script>
+        // 核心邏輯 (維持不變)
         function addToCalendar() {
             const title = "陳沂開播中 - 沂派胡言";
             const details = "SWAG「沂派胡言」每週四晚間九點準時開播！\n直播間：https://swag.live/user/662a4f253a7fe8f3ff7f95f2";
@@ -250,11 +249,7 @@
         let currentTopic = { id: null, title: "", option: "" };
         function triggerVote(id, optionText) {
             const card = document.querySelectorAll('.topic-card')[id-1];
-            currentTopic = {
-                id: id,
-                title: card.querySelector('.topic-title').innerText,
-                option: optionText
-            };
+            currentTopic = { id: id, title: card.querySelector('.topic-title').innerText, option: optionText };
             toggleModal();
         }
 
@@ -268,7 +263,7 @@
             const swid = document.getElementById('swid').value;
             if(swid === "") { alert("請填寫 ID 參加抽獎！"); return; }
             
-            // ⚠️ 記得替換成你的 Google Apps Script URL
+            // ⚠️ 替換你的 Google Apps Script URL
             const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
@@ -283,11 +278,7 @@
                 method: 'POST',
                 mode: 'no-cors',
                 body: formData
-            }).then(() => {
-                showFinalResults(swid);
-            }).catch(() => {
-                showFinalResults(swid);
-            });
+            }).then(() => { showFinalResults(swid); }).catch(() => { showFinalResults(swid); });
         }
 
         function showFinalResults(swid) {
