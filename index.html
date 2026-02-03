@@ -93,7 +93,7 @@
         </div>
         
         <div class="relative z-10 w-full max-w-5xl flex flex-col items-center">
-            <div class="h-20 md:h-32 lg:h-40"></div> 
+            <div class="h-16 md:h-32 lg:h-40"></div> 
             
             <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-6">
             
@@ -109,13 +109,13 @@
                     每週四晚間九點 <span class="text-pink-500 border-b-2 border-pink-500">準時開播</span>
                 </p>
                 
-                <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-lg px-6">
+                <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-lg px-4">
                     <a href="https://swag.live/user/662a4f253a7fe8f3ff7f95f2" target="_blank" 
-                       class="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-pink-600 hover:bg-pink-500 transition-all font-black text-white shadow-lg text-lg">
+                       class="w-full flex items-center justify-center gap-2 py-4 px-2 sm:px-4 rounded-2xl bg-pink-600 hover:bg-pink-500 transition-all font-black text-white shadow-lg text-base md:text-lg whitespace-nowrap">
                         <i class="fas fa-heart"></i> 追蹤不錯過開播
                     </a>
                     <button onclick="addToCalendar()" 
-                            class="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all font-black text-white shadow-lg text-lg">
+                            class="w-full flex items-center justify-center gap-2 py-4 px-2 sm:px-4 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all font-black text-white shadow-lg text-base md:text-lg whitespace-nowrap">
                         <i class="fab fa-google"></i> 加入行事曆
                     </button>
                 </div>
@@ -130,7 +130,6 @@
                 <h2 class="title-discussion text-4xl md:text-6xl font-black italic">本週熱門討論話題</h2>
             </div>
             <p class="text-gray-100 text-sm md:text-lg mb-12 max-w-3xl mx-auto leading-relaxed font-medium">
-                本週話題陳沂將在直播中親自開撕！快來投下你的真心話，陳沂陪你線上開戰。<br class="hidden md:block">
                 參與投票意見並留下 SWAG ID，週週加碼抽 <span class="text-pink-500 font-bold border-b border-pink-500 text-lg md:text-xl">3 位贈送 1000 鑽</span>
             </p>
 
@@ -140,8 +139,8 @@
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Dcard 熱議：請客點了 365 元鹽酥雞被抱怨。是拜金還是小氣？</p>
                     <div class="vote-container">
                         <div id="vote-ui-1" class="space-y-3">
-                            <button onclick="triggerVote(1, '根本拜金女')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold">根本拜金女</button>
-                            <button onclick="triggerVote(1, '男的有夠小氣')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold">男的有夠小氣</button>
+                            <button onclick="triggerVote(1, '根本拜金女')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap px-2">根本拜金女</button>
+                            <button onclick="triggerVote(1, '男的有夠小氣')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap px-2">男的有夠小氣</button>
                         </div>
                         <div id="res-1" class="hidden animate-pulse mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[65%]"></div></div>
@@ -155,8 +154,8 @@
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Threads 激辯：趁年輕花錢享受，還是存錢防老？你的選擇是？</p>
                     <div class="vote-container">
                         <div id="vote-ui-2" class="space-y-3">
-                            <button onclick="triggerVote(2, '不存錢等於自殺')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold">不存錢等於自殺</button>
-                            <button onclick="triggerVote(2, '存到死也沒用')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold">存到死也沒用</button>
+                            <button onclick="triggerVote(2, '不存錢等於自殺')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap px-2">不存錢等於自殺</button>
+                            <button onclick="triggerVote(2, '存到死也沒用')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap px-2">存到死也沒用</button>
                         </div>
                         <div id="res-2" class="hidden animate-pulse mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[40%]"></div></div>
@@ -170,8 +169,8 @@
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">公眾人物外遇是私事還是活該被檢視？兩大論戰你站哪一邊？</p>
                     <div class="vote-container">
                         <div id="vote-ui-3" class="space-y-3">
-                            <button onclick="triggerVote(3, '關我屁事')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold">關我屁事</button>
-                            <button onclick="triggerVote(3, '應被檢視')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold">應被檢視</button>
+                            <button onclick="triggerVote(3, '關我屁事')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap px-2">關我屁事</button>
+                            <button onclick="triggerVote(3, '應被檢視')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap px-2">應被檢視</button>
                         </div>
                         <div id="res-3" class="hidden animate-pulse mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[45%]"></div></div>
@@ -198,7 +197,7 @@
                 </p>
             </div>
 
-            <a href="https://swag.live/chat/697e24355646481dfa12fbe0" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-16 py-6 rounded-full gold-gradient text-black font-black text-2xl hover:scale-105 transition shadow-2xl">
+            <a href="https://swag.live/chat/697e24355646481dfa12fbe0" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-12 py-6 rounded-full gold-gradient text-black font-black text-xl md:text-2xl hover:scale-105 transition shadow-2xl whitespace-nowrap">
                 <i class="fas fa-envelope-open-text mr-3"></i> 立即投稿心事
             </a>
         </div>
@@ -207,9 +206,9 @@
     <footer class="bg-black py-12 border-t border-white/5">
         <div class="flex flex-col items-center justify-center gap-4 text-center px-4">
             <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-                <span class="text-gray-300 text-sm md:text-base tracking-widest">亞洲最大成人直播平台</span>
+                <span class="text-gray-300 text-sm md:text-base tracking-widest whitespace-nowrap">亞洲最大成人直播平台</span>
                 <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" alt="SWAG" class="h-6 opacity-90 inline-block">
-                <span class="text-gray-300 text-sm md:text-base tracking-widest">限 18 歲以上用戶登錄</span>
+                <span class="text-gray-300 text-sm md:text-base tracking-widest whitespace-nowrap">限 18 歲以上用戶登錄</span>
             </div>
             <p class="text-gray-600 text-xs tracking-tighter uppercase mt-4">© 2026 SWAG.LIVE ALL RIGHTS RESERVED.</p>
         </div>
@@ -219,13 +218,12 @@
         <div class="card-glass p-10 md:p-14 rounded-[2.5rem] w-full max-w-md border-pink-500/50">
             <h2 class="text-2xl font-black mb-6">參加鑽石抽獎</h2>
             <input type="text" id="swid" placeholder="Your SWAG ID" class="w-full bg-black border border-white/10 rounded-2xl px-6 py-4 mb-8 text-white text-center text-xl outline-none focus:border-pink-500">
-            <button id="submitBtn" onclick="closeModalWithResult()" class="w-full swag-gradient py-4 rounded-xl font-black text-xl mb-4">送出並看結果</button>
+            <button id="submitBtn" onclick="closeModalWithResult()" class="w-full swag-gradient py-4 rounded-xl font-black text-xl mb-4 whitespace-nowrap">送出並看結果</button>
             <button onclick="toggleModal()" class="text-gray-400 text-sm">關閉</button>
         </div>
     </div>
 
     <script>
-        // 核心邏輯 (維持不變)
         function addToCalendar() {
             const title = "陳沂開播中 - 沂派胡言";
             const details = "SWAG「沂派胡言」每週四晚間九點準時開播！\n直播間：https://swag.live/user/662a4f253a7fe8f3ff7f95f2";
@@ -262,18 +260,14 @@
         function closeModalWithResult() {
             const swid = document.getElementById('swid').value;
             if(swid === "") { alert("請填寫 ID 參加抽獎！"); return; }
-            
-            // ⚠️ 替換你的 Google Apps Script URL
             const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.innerText = "紀錄中...";
-
             const formData = new URLSearchParams();
             formData.append('swagID', swid);
             formData.append('topic', currentTopic.title);
             formData.append('option', currentTopic.option);
-
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
