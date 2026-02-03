@@ -11,7 +11,7 @@
         
         body { background-color: #050505; color: #ffffff; overflow-x: hidden; font-family: 'Noto Sans TC', sans-serif; }
         
-        /* 標題特效優化 */
+        /* 1. 標題霓虹特效 - 確保緩衝 */
         .title-discussion {
             background: linear-gradient(90deg, #ff007f, #ffffff, #ff007f);
             background-size: 200% auto; 
@@ -35,6 +35,7 @@
             to { text-shadow: 0 0 30px #ff8c00; transform: skewX(2deg); }
         }
 
+        /* 2. 區塊背景過度 */
         .bg-event-1 {
             background: radial-gradient(circle at top, #220512 0%, #050505 100%);
             border-top: 1px solid rgba(255, 0, 127, 0.2);
@@ -46,18 +47,27 @@
             transition: background 0.8s ease;
         }
 
+        /* 3. 卡片懸停特效與佈局 */
         .topic-card {
             display: flex;
             flex-direction: column;
             height: 100%;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .topic-card.active { opacity: 1; transform: translateY(0); }
+        .topic-card:hover {
+            border-color: rgba(255, 0, 127, 0.6);
+            box-shadow: 0 15px 40px rgba(255, 0, 127, 0.3);
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+        }
 
         .vote-container { margin-top: auto; }
 
+        /* 4. 特效元件 */
         .swag-gradient { background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); }
         .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
         .neon-text { animation: flicker 3s infinite alternate; }
@@ -70,7 +80,7 @@
             0% { text-shadow: 0.05em 0 0 #ff007f, -0.05em -0.025em 0 #7b2ff7; }
             100% { text-shadow: -0.025em 0 0 #ff007f, -0.025em -0.05em 0 #00ffff; }
         }
-        .card-glass { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
         
         .img-mask { 
             -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
@@ -97,7 +107,7 @@
             
             <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-6">
             
-            <h1 class="font-title text-5xl sm:text-7xl md:text-9xl lg:text-[11rem] font-black leading-none mb-8 italic tracking-tight">
+            <h1 class="font-title text-[clamp(3rem,12vw,11rem)] font-black leading-none mb-8 italic tracking-tight">
                 <span class="neon-text text-white">沂派</span><span class="glitch">胡言</span>
             </h1>
             
@@ -133,14 +143,14 @@
                 參與投票意見並留下 SWAG ID，週週加碼抽 <span class="text-pink-500 font-bold border-b border-pink-500 text-lg md:text-xl">3 位贈送 1000 鑽</span>
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch">
-                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem] border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch px-4 md:px-0">
+                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
                     <h3 class="text-xl font-bold mb-4 topic-title">1. 365元鹽酥雞貴嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Dcard 熱議：請客點了 365 元鹽酥雞被抱怨。是拜金還是小氣？</p>
                     <div class="vote-container">
                         <div id="vote-ui-1" class="space-y-3">
-                            <button onclick="triggerVote(1, '根本拜金女')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap px-2">根本拜金女</button>
-                            <button onclick="triggerVote(1, '男的有夠小氣')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap px-2">男的有夠小氣</button>
+                            <button onclick="triggerVote(1, '根本拜金女')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap">根本拜金女</button>
+                            <button onclick="triggerVote(1, '男的有夠小氣')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap">男的有夠小氣</button>
                         </div>
                         <div id="res-1" class="hidden animate-pulse mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[65%]"></div></div>
@@ -149,13 +159,13 @@
                     </div>
                 </div>
 
-                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem] border-white/10">
+                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
                     <h3 class="text-xl font-bold mb-4 topic-title">2. 努力存錢 vs 及時行樂</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Threads 激辯：趁年輕花錢享受，還是存錢防老？你的選擇是？</p>
                     <div class="vote-container">
                         <div id="vote-ui-2" class="space-y-3">
-                            <button onclick="triggerVote(2, '不存錢等於自殺')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap px-2">不存錢等於自殺</button>
-                            <button onclick="triggerVote(2, '存到死也沒用')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap px-2">存到死也沒用</button>
+                            <button onclick="triggerVote(2, '不存錢等於自殺')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap">不存錢等於自殺</button>
+                            <button onclick="triggerVote(2, '存到死也沒用')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap">存到死也沒用</button>
                         </div>
                         <div id="res-2" class="hidden animate-pulse mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[40%]"></div></div>
@@ -164,13 +174,13 @@
                     </div>
                 </div>
 
-                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem] border-white/10">
+                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
                     <h3 class="text-xl font-bold mb-4 topic-title">3. 外遇該被無限檢視嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">公眾人物外遇是私事還是活該被檢視？兩大論戰你站哪一邊？</p>
                     <div class="vote-container">
                         <div id="vote-ui-3" class="space-y-3">
-                            <button onclick="triggerVote(3, '關我屁事')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap px-2">關我屁事</button>
-                            <button onclick="triggerVote(3, '應被檢視')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap px-2">應被檢視</button>
+                            <button onclick="triggerVote(3, '關我屁事')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-pink-600 transition font-bold whitespace-nowrap">關我屁事</button>
+                            <button onclick="triggerVote(3, '應被檢視')" class="w-full py-4 rounded-xl bg-white/5 border border-white/20 hover:bg-purple-600 transition font-bold whitespace-nowrap">應被檢視</button>
                         </div>
                         <div id="res-3" class="hidden animate-pulse mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden"><div class="swag-gradient w-[45%]"></div></div>
@@ -187,7 +197,6 @@
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="inline-block border border-orange-400 text-orange-400 px-6 py-1 rounded-full text-xs font-black mb-8 uppercase tracking-widest">活動 2</div>
             <div class="mb-10"><h2 class="title-clinic text-5xl md:text-7xl font-black italic">沂定有藥醫</h2></div>
-            
             <div class="card-glass p-10 md:p-14 rounded-[2.5rem] md:rounded-[3.5rem] border-orange-400/20 mb-12 md:mb-16 relative">
                 <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-black border border-orange-400/50 w-12 h-12 rounded-full flex items-center justify-center text-orange-400 text-xl">
                     <i class="fas fa-inbox"></i>
@@ -196,8 +205,7 @@
                     「你有病，我有藥。<br>私訊陳沂並在開頭註明：<span class="text-orange-400 font-black">「沂定有藥醫 投稿」</span>寫下你的困擾，陳沂將在當周直播現場幫你治腦袋。」
                 </p>
             </div>
-
-            <a href="https://swag.live/chat/697e24355646481dfa12fbe0" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-12 py-6 rounded-full gold-gradient text-black font-black text-xl md:text-2xl hover:scale-105 transition shadow-2xl whitespace-nowrap">
+            <a href="https://swag.live/chat/697e24355646481dfa12fbe0" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-16 py-6 rounded-full gold-gradient text-black font-black text-2xl hover:scale-105 transition shadow-2xl">
                 <i class="fas fa-envelope-open-text mr-3"></i> 立即投稿心事
             </a>
         </div>
@@ -206,9 +214,9 @@
     <footer class="bg-black py-12 border-t border-white/5">
         <div class="flex flex-col items-center justify-center gap-4 text-center px-4">
             <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-                <span class="text-gray-300 text-sm md:text-base tracking-widest whitespace-nowrap">亞洲最大成人直播平台</span>
+                <span class="text-gray-300 text-sm md:text-base tracking-widest">亞洲最大成人直播平台</span>
                 <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" alt="SWAG" class="h-6 opacity-90 inline-block">
-                <span class="text-gray-300 text-sm md:text-base tracking-widest whitespace-nowrap">限 18 歲以上用戶登錄</span>
+                <span class="text-gray-300 text-sm md:text-base tracking-widest">限 18 歲以上用戶登錄</span>
             </div>
             <p class="text-gray-600 text-xs tracking-tighter uppercase mt-4">© 2026 SWAG.LIVE ALL RIGHTS RESERVED.</p>
         </div>
@@ -260,14 +268,18 @@
         function closeModalWithResult() {
             const swid = document.getElementById('swid').value;
             if(swid === "") { alert("請填寫 ID 參加抽獎！"); return; }
+            
+            // 此處填入你的 Google Apps Script URL
             const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.innerText = "紀錄中...";
+
             const formData = new URLSearchParams();
             formData.append('swagID', swid);
             formData.append('topic', currentTopic.title);
             formData.append('option', currentTopic.option);
+
             fetch(scriptURL, {
                 method: 'POST',
                 mode: 'no-cors',
