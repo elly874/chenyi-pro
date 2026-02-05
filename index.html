@@ -11,7 +11,7 @@
         
         body { background-color: #050505; color: #ffffff; overflow-x: hidden; font-family: 'Noto Sans TC', sans-serif; }
         
-        /* 1. 標題霓虹特效 - 確保緩衝 */
+        /* 標題霓虹特效 */
         .title-discussion {
             background: linear-gradient(90deg, #ff007f, #ffffff, #ff007f);
             background-size: 200% auto; 
@@ -35,7 +35,6 @@
             to { text-shadow: 0 0 30px #ff8c00; transform: skewX(2deg); }
         }
 
-        /* 2. 區塊背景過度 */
         .bg-event-1 {
             background: radial-gradient(circle at top, #220512 0%, #050505 100%);
             border-top: 1px solid rgba(255, 0, 127, 0.2);
@@ -47,7 +46,6 @@
             transition: background 0.8s ease;
         }
 
-        /* 3. 卡片懸停特效與佈局 */
         .topic-card {
             display: flex;
             flex-direction: column;
@@ -66,8 +64,6 @@
         }
 
         .vote-container { margin-top: auto; }
-
-        /* 4. 特效元件 */
         .swag-gradient { background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); }
         .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
         .neon-text { animation: flicker 3s infinite alternate; }
@@ -81,12 +77,10 @@
             100% { text-shadow: -0.025em 0 0 #ff007f, -0.025em -0.05em 0 #00ffff; }
         }
         .card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
-        
         .img-mask { 
             -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
             mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
         }
-
         .float-icon { animation: float 3s ease-in-out infinite; }
         @keyframes float {
             0%, 100% { transform: translateY(0); opacity: 0.6; }
@@ -104,13 +98,10 @@
         
         <div class="relative z-10 w-full max-w-5xl flex flex-col items-center">
             <div class="h-16 md:h-32 lg:h-40"></div> 
-            
             <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-6">
-            
             <h1 class="font-title text-[clamp(3rem,12vw,11rem)] font-black leading-none mb-8 italic tracking-tight">
                 <span class="neon-text text-white">沂派</span><span class="glitch">胡言</span>
             </h1>
-            
             <div class="flex flex-col items-center gap-6">
                 <div class="bg-white text-black px-4 md:px-6 py-2 font-bold transform skew-x-[-12deg] shadow-[5px_5px_0px_#ff007f] text-xs md:text-lg">
                     話題女王陳沂 2 / 26 正式迴歸
@@ -118,7 +109,6 @@
                 <p class="text-lg md:text-2xl font-bold tracking-[0.1em] md:tracking-[0.3em] text-white">
                     每週四晚間九點 <span class="text-pink-500 border-b-2 border-pink-500">準時開播</span>
                 </p>
-                
                 <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-lg px-4">
                     <a href="https://swag.live/user/662a4f253a7fe8f3ff7f95f2" target="_blank" 
                        class="w-full flex items-center justify-center gap-2 py-4 px-2 sm:px-4 rounded-2xl bg-pink-600 hover:bg-pink-500 transition-all font-black text-white shadow-lg text-base md:text-lg whitespace-nowrap">
@@ -269,8 +259,8 @@
             const swid = document.getElementById('swid').value;
             if(swid === "") { alert("請填寫 ID 參加抽獎！"); return; }
             
-            // 此處填入你的 Google Apps Script URL
-            const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; 
+            // 🚀 重要：在此替換成你剛剛部署好的 Google Apps Script 網址
+            const scriptURL = '你的_APPS_SCRIPT_網址'; 
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.innerText = "紀錄中...";
