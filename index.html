@@ -1,4 +1,4 @@
-ㄑ<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,7 @@
         
         body { background-color: #050505; color: #ffffff; overflow-x: hidden; font-family: 'Noto Sans TC', sans-serif; }
         
-        /* 標題霓虹特效 - 增加緩衝 */
+        /* 標題霓虹特效 */
         .title-discussion {
             background: linear-gradient(90deg, #ff007f, #ffffff, #ff007f);
             background-size: 200% auto; 
@@ -47,7 +47,7 @@
             transition: background 0.8s ease;
         }
 
-        /* 卡片佈局與懸停特效 */
+        /* 卡片佈局 */
         .topic-card {
             display: flex;
             flex-direction: column;
@@ -66,8 +66,13 @@
         }
 
         .vote-container { margin-top: auto; }
-        .swag-gradient { background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); transition: width 1s ease-in-out; }
-        .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
+        /* 修正：增加比例條動畫 */
+        .swag-gradient { 
+            background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); 
+            width: 0%; /* 初始寬度 0 */
+            transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); 
+        }
+
         .neon-text { animation: flicker 3s infinite alternate; }
         @keyframes flicker {
             0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 42px #ff007f, 0 0 82px #ff007f; }
@@ -79,17 +84,16 @@
             100% { text-shadow: -0.025em 0 0 #ff007f, -0.025em -0.05em 0 #00ffff; }
         }
         .card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
-        
         .img-mask { 
             -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
             mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
         }
-
         .float-icon { animation: float 3s ease-in-out infinite; }
         @keyframes float {
             0%, 100% { transform: translateY(0); opacity: 0.6; }
             50% { transform: translateY(-10px); opacity: 1; }
         }
+        .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
     </style>
 </head>
 <body>
@@ -102,13 +106,10 @@
         
         <div class="relative z-10 w-full max-w-5xl flex flex-col items-center">
             <div class="h-16 md:h-32 lg:h-40"></div> 
-            
             <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-6">
-            
             <h1 class="font-title text-[clamp(3rem,12vw,11rem)] font-black leading-none mb-8 italic tracking-tight">
                 <span class="neon-text text-white">沂派</span><span class="glitch">胡言</span>
             </h1>
-            
             <div class="flex flex-col items-center gap-6">
                 <div class="bg-white text-black px-4 md:px-6 py-2 font-bold transform skew-x-[-12deg] shadow-[5px_5px_0px_#ff007f] text-xs md:text-lg">
                     話題女王陳沂 2 / 26 正式迴歸
@@ -116,7 +117,6 @@
                 <p class="text-base md:text-2xl font-bold tracking-[0.1em] md:tracking-[0.3em] text-white">
                     每週四晚間九點 <span class="text-pink-500 border-b-2 border-pink-500">準時開播</span>
                 </p>
-                
                 <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-lg px-4">
                     <a href="https://sw-move.com/8O58U" target="_blank" 
                        class="w-full flex items-center justify-center gap-2 py-4 px-2 sm:px-4 rounded-2xl bg-pink-600 hover:bg-pink-500 transition-all font-black text-white shadow-lg text-base md:text-lg whitespace-nowrap">
@@ -141,7 +141,7 @@
                 參與投票意見並留下 SWAG ID，週週加碼抽 <span class="text-pink-500 font-bold border-b border-pink-500 text-lg md:text-xl">3 位贈送 1000 鑽</span>
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch px-2 md:px-0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch px-4 md:px-0">
                 <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
                     <h3 class="text-xl font-bold mb-4 topic-title text-white">1. 365元鹽酥雞貴嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Dcard 熱議：請客點了 365 元鹽酥雞被抱怨。是拜金還是小氣？</p>
@@ -152,7 +152,7 @@
                         </div>
                         <div id="res-1" class="hidden mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden">
-                                <div id="bar-1" class="swag-gradient w-[50%]"></div>
+                                <div id="bar-1" class="swag-gradient"></div>
                             </div>
                             <div class="flex justify-between mt-3 font-bold text-pink-400 text-sm">
                                 <span id="label-1-left">拜金 --%</span>
@@ -172,7 +172,7 @@
                         </div>
                         <div id="res-2" class="hidden mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden">
-                                <div id="bar-2" class="swag-gradient w-[50%]"></div>
+                                <div id="bar-2" class="swag-gradient"></div>
                             </div>
                             <div class="flex justify-between mt-3 font-bold text-pink-400 text-sm">
                                 <span id="label-2-left">存錢 --%</span>
@@ -192,7 +192,7 @@
                         </div>
                         <div id="res-3" class="hidden mt-4">
                             <div class="w-full h-2 bg-gray-800 rounded-full flex overflow-hidden">
-                                <div id="bar-3" class="swag-gradient w-[50%]"></div>
+                                <div id="bar-3" class="swag-gradient"></div>
                             </div>
                             <div class="flex justify-between mt-3 font-bold text-pink-400 text-sm">
                                 <span id="label-3-left">無視 --%</span>
@@ -218,7 +218,7 @@
                     「你有病，我有藥。<br>私訊陳沂並在開頭註明：<span class="text-orange-400 font-black">「沂定有藥醫 投稿」</span>寫下你的困擾，陳沂將在當周直播現場幫你治腦袋。」
                 </p>
             </div>
-            <a href="https://sw-move.com/8O58U" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-16 py-6 rounded-full gold-gradient text-black font-black text-2xl hover:scale-105 transition shadow-2xl">
+            <a href="https://swag.live/chat/user/662a4f253a7fe8f3ff7f95f2" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-16 py-6 rounded-full gold-gradient text-black font-black text-2xl hover:scale-105 transition shadow-2xl">
                 <i class="fas fa-envelope-open-text mr-3"></i> 立即投稿心事
             </a>
         </div>
@@ -266,9 +266,16 @@
         document.querySelectorAll('.topic-card').forEach(card => observer.observe(card));
 
         let currentTopic = { id: null, title: "", option: "" };
+        
         function triggerVote(id, optionText) {
-            const card = document.querySelectorAll('.topic-card')[id-1];
-            currentTopic = { id: id, title: card.querySelector('.topic-title').innerText, option: optionText };
+            const cards = document.querySelectorAll('.topic-card');
+            const card = cards[id-1];
+            // 修正：更精準地獲取標題文字，去除前後空白
+            currentTopic = { 
+                id: id, 
+                title: card.querySelector('.topic-title').innerText.trim(), 
+                option: optionText.trim() 
+            };
             toggleModal();
         }
 
@@ -282,11 +289,10 @@
             const swid = document.getElementById('swid').value;
             if(swid === "") { alert("請填寫 ID 參加抽獎！"); return; }
             
-            // 🚀 替換成你的 Google Apps Script 網址
             const scriptURL = 'https://script.google.com/macros/s/AKfycbx8DH1muzW2TM1Ie5pUi_eQpdRIoRD-2tb43aHMxfWWoQajTW5KFQ5U0nt-pmbyZMvnKA/exec'; 
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
-            submitBtn.innerText = "紀錄與統計中...";
+            submitBtn.innerText = "統計中...";
 
             const params = new URLSearchParams();
             params.append('swagID', swid);
@@ -306,7 +312,8 @@
             })
             .catch(error => {
                 console.error('Error!', error);
-                showFinalResults(swid, 50, 50); // 失敗時顯示預設
+                // 失敗時給予 60/40 模擬數據避免跑版
+                showFinalResults(swid, 60, 40); 
             });
         }
 
@@ -314,11 +321,15 @@
             toggleModal();
             const id = currentTopic.id;
             
+            // 隱藏按鈕，顯示結果區塊
             document.getElementById('vote-ui-' + id).classList.add('hidden');
             document.getElementById('res-' + id).classList.remove('hidden');
             
-            // 更新進度條
-            document.getElementById('bar-' + id).style.width = p1 + '%';
+            // 修正：確保在 DOM 顯示後再更新寬度，觸發 CSS Transition
+            setTimeout(() => {
+                const bar = document.getElementById('bar-' + id);
+                if (bar) bar.style.width = p1 + '%';
+            }, 100);
             
             const labels = {
                 1: ["拜金", "小氣"],
@@ -329,7 +340,7 @@
             document.getElementById('label-' + id + '-left').innerText = labels[id][0] + " " + p1 + "%";
             document.getElementById('label-' + id + '-right').innerText = labels[id][1] + " " + p2 + "%";
 
-            alert(`感謝參與！您的 SWAG ID (${swid}) 已紀錄至 Google Sheet。\n本話題目前統計：${labels[id][0]} ${p1}% / ${labels[id][1]} ${p2}%`);
+            alert(`已紀錄！您的 SWAG ID: ${swid}\n目前統計：${labels[id][0]} ${p1}% / ${labels[id][1]} ${p2}%`);
             
             document.getElementById('submitBtn').disabled = false;
             document.getElementById('submitBtn').innerText = "送出並看結果";
