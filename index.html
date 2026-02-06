@@ -11,7 +11,7 @@
         
         body { background-color: #050505; color: #ffffff; overflow-x: hidden; font-family: 'Noto Sans TC', sans-serif; }
         
-        /* 標題霓虹特效 - 解決切字與亮度問題 */
+        /* 標題霓虹特效 - 增加緩衝 */
         .title-discussion {
             background: linear-gradient(90deg, #ff007f, #ffffff, #ff007f);
             background-size: 200% auto; 
@@ -35,7 +35,7 @@
             to { text-shadow: 0 0 30px #ff8c00; transform: skewX(2deg); }
         }
 
-        /* 區塊過渡背景 */
+        /* 區塊背景 */
         .bg-event-1 {
             background: radial-gradient(circle at top, #220512 0%, #050505 100%);
             border-top: 1px solid rgba(255, 0, 127, 0.2);
@@ -47,7 +47,7 @@
             transition: background 0.8s ease;
         }
 
-        /* 卡片懸停與對齊 */
+        /* 卡片佈局與懸停特效 */
         .topic-card {
             display: flex;
             flex-direction: column;
@@ -68,7 +68,6 @@
         .vote-container { margin-top: auto; }
         .swag-gradient { background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); transition: width 1s ease-in-out; }
         .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
-        
         .neon-text { animation: flicker 3s infinite alternate; }
         @keyframes flicker {
             0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 42px #ff007f, 0 0 82px #ff007f; }
@@ -81,7 +80,6 @@
         }
         .card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
         
-        /* 圖片遮罩：讓文字壓在圖片交界處 */
         .img-mask { 
             -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
             mask-image: linear-gradient(to bottom, black 60%, transparent 95%); 
@@ -145,7 +143,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch px-2 md:px-0">
                 <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
-                    <h3 class="text-xl font-bold mb-4 topic-title">1. 365元鹽酥雞貴嗎？</h3>
+                    <h3 class="text-xl font-bold mb-4 topic-title text-white">1. 365元鹽酥雞貴嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Dcard 熱議：請客點了 365 元鹽酥雞被抱怨。是拜金還是小氣？</p>
                     <div class="vote-container">
                         <div id="vote-ui-1" class="space-y-3">
@@ -165,7 +163,7 @@
                 </div>
 
                 <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
-                    <h3 class="text-xl font-bold mb-4 topic-title">2. 努力存錢 vs 及時行樂</h3>
+                    <h3 class="text-xl font-bold mb-4 topic-title text-white">2. 努力存錢 vs 及時行樂</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Threads 激辯：趁年輕花錢享受，還是存錢防老？你的選擇是？</p>
                     <div class="vote-container">
                         <div id="vote-ui-2" class="space-y-3">
@@ -185,7 +183,7 @@
                 </div>
 
                 <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
-                    <h3 class="text-xl font-bold mb-4 topic-title">3. 外遇該被無限檢視嗎？</h3>
+                    <h3 class="text-xl font-bold mb-4 topic-title text-white">3. 外遇該被無限檢視嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">公眾人物外遇是私事還是活該被檢視？兩大論戰你站哪一邊？</p>
                     <div class="vote-container">
                         <div id="vote-ui-3" class="space-y-3">
@@ -212,7 +210,7 @@
         <div class="max-w-4xl mx-auto relative z-10">
             <div class="inline-block border border-orange-400 text-orange-400 px-6 py-1 rounded-full text-xs font-black mb-8 uppercase tracking-widest">活動 2</div>
             <div class="mb-10"><h2 class="title-clinic text-5xl md:text-7xl font-black italic">沂定有藥醫</h2></div>
-            <div class="card-glass p-10 md:p-14 rounded-[2.5rem] md:rounded-[3.5rem] border-orange-400/20 mb-12 md:mb-16 relative">
+            <div class="card-glass p-10 md:p-14 rounded-[2.5rem] md:rounded-[3.5rem] border-orange-400/20 mb-12 md:mb-16 relative text-white text-center">
                 <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-black border border-orange-400/50 w-12 h-12 rounded-full flex items-center justify-center text-orange-400 text-xl">
                     <i class="fas fa-inbox"></i>
                 </div>
@@ -239,15 +237,14 @@
 
     <div id="modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/95 p-6 text-center">
         <div class="card-glass p-10 md:p-14 rounded-[2.5rem] w-full max-w-md border-pink-500/50">
-            <h2 class="text-2xl font-black mb-6">參加鑽石抽獎</h2>
+            <h2 class="text-2xl font-black mb-6 text-white">參加鑽石抽獎</h2>
             <input type="text" id="swid" placeholder="Your SWAG ID" class="w-full bg-black border border-white/10 rounded-2xl px-6 py-4 mb-8 text-white text-center text-xl outline-none focus:border-pink-500">
-            <button id="submitBtn" onclick="closeModalWithResult()" class="w-full swag-gradient py-4 rounded-xl font-black text-xl mb-4 whitespace-nowrap">送出並看結果</button>
+            <button id="submitBtn" onclick="closeModalWithResult()" class="w-full swag-gradient py-4 rounded-xl font-black text-xl mb-4 whitespace-nowrap text-white">送出並看結果</button>
             <button onclick="toggleModal()" class="text-gray-400 text-sm">關閉</button>
         </div>
     </div>
 
     <script>
-        // 1. 行事曆功能
         function addToCalendar() {
             const title = "陳沂開播中 - 沂派胡言";
             const details = "SWAG「沂派胡言」每週四晚間九點準時開播！\n直播間：https://swag.live/user/662a4f253a7fe8f3ff7f95f2";
@@ -263,13 +260,11 @@
             window.open(calendarUrl, '_blank');
         }
 
-        // 2. 滾動動畫監聽
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.topic-card').forEach(card => observer.observe(card));
 
-        // 3. 投票紀錄與統計發送
         let currentTopic = { id: null, title: "", option: "" };
         function triggerVote(id, optionText) {
             const card = document.querySelectorAll('.topic-card')[id-1];
@@ -287,31 +282,42 @@
             const swid = document.getElementById('swid').value;
             if(swid === "") { alert("請填寫 ID 參加抽獎！"); return; }
             
-            // 🚀 重要：在此填入部署 Apps Script 後得到的 URL
-            const scriptURL = 'YOUR_APPS_SCRIPT_URL_HERE'; 
+            // 🚀 替換成你的 Google Apps Script 網址
+            const scriptURL = '這裡貼上你部署後的Google腳本網址'; 
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
             submitBtn.innerText = "紀錄與統計中...";
 
-            const formData = new URLSearchParams();
-            formData.append('swagID', swid);
-            formData.append('topic', currentTopic.title);
-            formData.append('option', currentTopic.option);
+            const params = new URLSearchParams();
+            params.append('swagID', swid);
+            params.append('topic', currentTopic.title);
+            params.append('option', currentTopic.option);
 
-            fetch(scriptURL, { method: 'POST', body: formData })
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+            })
             .then(response => response.json())
-            .then(data => { showFinalResults(swid, data.percent1, data.percent2); })
-            .catch(error => { 
-                console.error('Error!', error); 
-                showFinalResults(swid, 50, 50); // 萬一連線失敗，顯示 50/50 
+            .then(data => {
+                showFinalResults(swid, data.percent1, data.percent2);
+            })
+            .catch(error => {
+                console.error('Error!', error);
+                showFinalResults(swid, 50, 50); // 失敗時顯示預設
             });
         }
 
         function showFinalResults(swid, p1, p2) {
             toggleModal();
             const id = currentTopic.id;
+            
             document.getElementById('vote-ui-' + id).classList.add('hidden');
             document.getElementById('res-' + id).classList.remove('hidden');
+            
+            // 更新進度條
             document.getElementById('bar-' + id).style.width = p1 + '%';
             
             const labels = {
@@ -325,9 +331,8 @@
 
             alert(`感謝參與！您的 SWAG ID (${swid}) 已紀錄至 Google Sheet。\n本話題目前統計：${labels[id][0]} ${p1}% / ${labels[id][1]} ${p2}%`);
             
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = false;
-            submitBtn.innerText = "送出並看結果";
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitBtn').innerText = "送出並看結果";
             document.getElementById('swid').value = "";
         }
     </script>
