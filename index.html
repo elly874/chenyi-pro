@@ -52,37 +52,48 @@
         }
 
         .vote-container { margin-top: auto; }
-        .swag-gradient { 
-            background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); 
-            width: 0%; 
-            transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); 
-        }
-
+        .swag-gradient { background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); width: 0%; transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); }
         .card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
         .img-mask { -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%); mask-image: linear-gradient(to bottom, black 60%, transparent 95%); }
         .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
 
-        /* 🚀 LOGO 閃光特效 CSS */
-        .logo-container {
+        /* 🚀 優化後的 LOGO 只對文字區域有閃光特效 */
+        .logo-wrapper {
             position: relative;
-            overflow: hidden;
             display: inline-block;
+            width: 300px; /* 手機版預設 */
         }
-        .logo-container::after {
-            content: "";
+        @media (min-width: 640px) { .logo-wrapper { width: 500px; } }
+        @media (min-width: 768px) { .logo-wrapper { width: 700px; } }
+        @media (min-width: 1024px) { .logo-wrapper { width: 850px; } }
+
+        /* 底層原圖 */
+        .logo-base {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 閃光層：利用 mask-image 只在非透明區域顯示 */
+        .logo-shine {
             position: absolute;
-            top: -50%;
-            left: -100%;
-            width: 50%;
-            height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: rotate(30deg);
-            animation: logo-shine 3s infinite;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.6) 50%, transparent 80%);
+            background-size: 200% 100%;
+            -webkit-mask-image: url('https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/01%E3%80%90%E7%AF%80%E7%9B%AE%20LOGO%20%E5%8E%BB%E8%83%8C%E6%AA%94%E3%80%91.png');
+            mask-image: url('https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/01%E3%80%90%E7%AF%80%E7%9B%AE%20LOGO%20%E5%8E%BB%E8%83%8C%E6%AA%94%E3%80%91.png');
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            animation: move-shine 3.5s infinite linear;
+            pointer-events: none;
         }
-        @keyframes logo-shine {
-            0% { left: -100%; }
-            30% { left: 150%; }
-            100% { left: 150%; }
+
+        @keyframes move-shine {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
     </style>
 </head>
@@ -98,9 +109,10 @@
             <div class="h-16 md:h-32 lg:h-40"></div> 
             <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-10">
             
-            <div class="logo-container mb-8">
+            <div class="logo-wrapper mb-8">
                 <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/01%E3%80%90%E7%AF%80%E7%9B%AE%20LOGO%20%E5%8E%BB%E8%83%8C%E6%AA%94%E3%80%91.png" 
-                     alt="沂派胡言" class="w-[300px] sm:w-[500px] md:w-[700px] lg:w-[850px] h-auto pointer-events-none">
+                     class="logo-base" alt="沂派胡言">
+                <div class="logo-shine"></div>
             </div>
 
             <div class="flex flex-col items-center gap-6">
@@ -243,51 +255,31 @@
         let currentTopic = { id: null, title: "", option: "" };
         function triggerVote(id, optionText) {
             const card = document.querySelectorAll('.topic-card')[id-1];
-            currentTopic = { 
-                id: id, 
-                title: card.querySelector('.topic-title').innerText.trim(), 
-                option: optionText.trim() 
-            };
+            currentTopic = { id: id, title: card.querySelector('.topic-title').innerText.trim(), option: optionText.trim() };
             toggleModal();
         }
-
         function toggleModal() { const m = document.getElementById('modal'); m.classList.toggle('hidden'); m.classList.toggle('flex'); }
 
         function closeModalWithResult() {
             const swid = document.getElementById('swid').value;
             if(swid === "") { alert("請填寫 ID！"); return; }
-            
             const id = currentTopic.id;
             toggleModal();
-
-            // 1. 立即切換 UI
             document.getElementById('vote-ui-' + id).classList.add('hidden');
             document.getElementById('res-' + id).classList.remove('hidden');
-            
             const bar = document.getElementById('bar-' + id);
             const labelLeft = document.getElementById('label-' + id + '-left');
             const labelRight = document.getElementById('label-' + id + '-right');
-
             setTimeout(() => {
                 bar.style.width = '50%';
                 bar.classList.add('animate-pulse');
                 labelLeft.innerText = "真實數據統計中...";
                 labelRight.innerText = "...";
             }, 100);
-
-            // 2. 發送 fetch
             const scriptURL = 'https://script.google.com/macros/s/AKfycbx8DH1muzW2TM1Ie5pUi_eQpdRIoRD-2tb43aHMxfWWoQajTW5KFQ5U0nt-pmbyZMvnKA/exec'; 
             const params = new URLSearchParams();
-            params.append('swagID', swid); 
-            params.append('topic', currentTopic.title); 
-            params.append('option', currentTopic.option);
-
-            fetch(scriptURL, { 
-                method: 'POST', 
-                mode: 'cors', 
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
-                body: params.toString() 
-            })
+            params.append('swagID', swid); params.append('topic', currentTopic.title); params.append('option', currentTopic.option);
+            fetch(scriptURL, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: params.toString() })
             .then(res => res.json())
             .then(data => {
                 bar.classList.remove('animate-pulse');
@@ -297,7 +289,6 @@
                 bar.classList.remove('animate-pulse');
                 updateRealUI(id, 65, 35); 
             });
-
             alert(`已送出！您的 SWAG ID: ${swid}\n名單每週五抽出！`);
             document.getElementById('swid').value = "";
         }
