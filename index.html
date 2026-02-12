@@ -52,28 +52,37 @@
         }
 
         .vote-container { margin-top: auto; }
-        
-        /* 🚀 比例條的核心樣式 */
         .swag-gradient { 
             background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); 
             width: 0%; 
             transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); 
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
         }
 
         .card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
         .img-mask { -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%); mask-image: linear-gradient(to bottom, black 60%, transparent 95%); }
         .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
-        
-        .neon-text { animation: flicker 3s infinite alternate; }
-        @keyframes flicker {
-            0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 42px #ff007f, 0 0 82px #ff007f; }
-            20%, 24%, 55% { text-shadow: none; }
+
+        /* 🚀 LOGO 閃光特效 CSS */
+        .logo-container {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
         }
-        .glitch { animation: glitch 500ms infinite; }
-        @keyframes glitch {
-            0% { text-shadow: 0.05em 0 0 #ff007f, -0.05em -0.025em 0 #7b2ff7; }
-            100% { text-shadow: -0.025em 0 0 #ff007f, -0.025em -0.05em 0 #00ffff; }
+        .logo-container::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: rotate(30deg);
+            animation: logo-shine 3s infinite;
+        }
+        @keyframes logo-shine {
+            0% { left: -100%; }
+            30% { left: 150%; }
+            100% { left: 150%; }
         }
     </style>
 </head>
@@ -87,10 +96,13 @@
         
         <div class="relative z-10 w-full max-w-5xl flex flex-col items-center">
             <div class="h-16 md:h-32 lg:h-40"></div> 
-            <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-6">
-            <h1 class="font-title text-[clamp(3rem,12vw,11rem)] font-black leading-none mb-8 italic tracking-tight">
-                <span class="neon-text text-white">沂派</span><span class="glitch">胡言</span>
-            </h1>
+            <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" class="h-8 md:h-10 mx-auto mb-10">
+            
+            <div class="logo-container mb-8">
+                <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/01%E3%80%90%E7%AF%80%E7%9B%AE%20LOGO%20%E5%8E%BB%E8%83%8C%E6%AA%94%E3%80%91.png" 
+                     alt="沂派胡言" class="w-[300px] sm:w-[500px] md:w-[700px] lg:w-[850px] h-auto pointer-events-none">
+            </div>
+
             <div class="flex flex-col items-center gap-6">
                 <div class="bg-white text-black px-4 md:px-6 py-2 font-bold transform skew-x-[-12deg] shadow-[5px_5px_0px_#ff007f] text-xs md:text-lg">
                     話題女王陳沂 2 / 26 正式迴歸
@@ -123,8 +135,8 @@
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch">
-                <div class="topic-card card-glass p-8 rounded-[2.5rem]">
-                    <h3 class="text-xl font-bold mb-4 topic-title">1. 365元鹽酥雞貴嗎？</h3>
+                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
+                    <h3 class="text-xl font-bold mb-4 topic-title text-white text-center sm:text-left">1. 365元鹽酥雞貴嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Dcard 熱議：請客點了 365 元鹽酥雞被抱怨。是拜金還是小氣？</p>
                     <div class="vote-container">
                         <div id="vote-ui-1" class="space-y-3">
@@ -143,8 +155,8 @@
                     </div>
                 </div>
 
-                <div class="topic-card card-glass p-8 rounded-[2.5rem]">
-                    <h3 class="text-xl font-bold mb-4 topic-title">2. 努力存錢 vs 及時行樂</h3>
+                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
+                    <h3 class="text-xl font-bold mb-4 topic-title text-white text-center sm:text-left">2. 努力存錢 vs 及時行樂</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Threads 激辯：趁年輕花錢享受，還是存錢防老？你的選擇是？</p>
                     <div class="vote-container">
                         <div id="vote-ui-2" class="space-y-3">
@@ -163,8 +175,8 @@
                     </div>
                 </div>
 
-                <div class="topic-card card-glass p-8 rounded-[2.5rem]">
-                    <h3 class="text-xl font-bold mb-4 topic-title">3. 外遇該被無限檢視嗎？</h3>
+                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
+                    <h3 class="text-xl font-bold mb-4 topic-title text-white text-center sm:text-left">3. 外遇該被無限檢視嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">公眾人物外遇是私事還是活該被檢視？兩大論戰你站哪一邊？</p>
                     <div class="vote-container">
                         <div id="vote-ui-3" class="space-y-3">
@@ -231,9 +243,14 @@
         let currentTopic = { id: null, title: "", option: "" };
         function triggerVote(id, optionText) {
             const card = document.querySelectorAll('.topic-card')[id-1];
-            currentTopic = { id: id, title: card.querySelector('.topic-title').innerText.trim(), option: optionText.trim() };
+            currentTopic = { 
+                id: id, 
+                title: card.querySelector('.topic-title').innerText.trim(), 
+                option: optionText.trim() 
+            };
             toggleModal();
         }
+
         function toggleModal() { const m = document.getElementById('modal'); m.classList.toggle('hidden'); m.classList.toggle('flex'); }
 
         function closeModalWithResult() {
@@ -243,7 +260,7 @@
             const id = currentTopic.id;
             toggleModal();
 
-            // 🚀 1. 立即切換 UI (動態條狀預熱)
+            // 1. 立即切換 UI
             document.getElementById('vote-ui-' + id).classList.add('hidden');
             document.getElementById('res-' + id).classList.remove('hidden');
             
@@ -251,7 +268,6 @@
             const labelLeft = document.getElementById('label-' + id + '-left');
             const labelRight = document.getElementById('label-' + id + '-right');
 
-            // 呼吸效果開始
             setTimeout(() => {
                 bar.style.width = '50%';
                 bar.classList.add('animate-pulse');
@@ -259,10 +275,12 @@
                 labelRight.innerText = "...";
             }, 100);
 
-            // 🚀 2. 背景同步資料
+            // 2. 發送 fetch
             const scriptURL = 'https://script.google.com/macros/s/AKfycbx8DH1muzW2TM1Ie5pUi_eQpdRIoRD-2tb43aHMxfWWoQajTW5KFQ5U0nt-pmbyZMvnKA/exec'; 
             const params = new URLSearchParams();
-            params.append('swagID', swid); params.append('topic', currentTopic.title); params.append('option', currentTopic.option);
+            params.append('swagID', swid); 
+            params.append('topic', currentTopic.title); 
+            params.append('option', currentTopic.option);
 
             fetch(scriptURL, { 
                 method: 'POST', 
@@ -272,17 +290,15 @@
             })
             .then(res => res.json())
             .then(data => {
-                // 🚀 3. 真實數據回傳後，自動平滑校準
                 bar.classList.remove('animate-pulse');
                 updateRealUI(id, data.percent1, data.percent2);
             })
             .catch(() => {
-                // 萬一失敗
                 bar.classList.remove('animate-pulse');
                 updateRealUI(id, 65, 35); 
             });
 
-            alert(`已送出！您的 SWAG ID: ${swid}\n感謝參與，我們將在每週五抽出鑽石得主！`);
+            alert(`已送出！您的 SWAG ID: ${swid}\n名單每週五抽出！`);
             document.getElementById('swid').value = "";
         }
 
