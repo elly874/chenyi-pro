@@ -25,11 +25,19 @@
         }
         @keyframes shine-discussion { to { background-position: 200% center; } }
 
-        /* 區塊過渡背景 */
+        .title-clinic {
+            color: #fff; text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+            animation: clinic-glow 2s ease-in-out infinite alternate; 
+            display: inline-block;
+        }
+        @keyframes clinic-glow {
+            from { text-shadow: 0 0 10px #ffd700; transform: skewX(-2deg); }
+            to { text-shadow: 0 0 30px #ff8c00; transform: skewX(2deg); }
+        }
+
         .bg-event-1 { background: radial-gradient(circle at top, #220512 0%, #050505 100%); border-top: 1px solid rgba(255, 0, 127, 0.2); }
         .bg-event-2 { background: radial-gradient(circle at top, #1a1408 0%, #050505 100%); border-top: 1px solid rgba(255, 215, 0, 0.15); }
 
-        /* 卡片佈局 */
         .topic-card {
             display: flex; flex-direction: column; height: 100%; opacity: 0;
             transform: translateY(30px); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -44,46 +52,27 @@
         }
 
         .vote-container { margin-top: auto; }
-        .swag-gradient { 
-            background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); 
-            width: 0%; 
-            transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); 
-        }
-
+        .swag-gradient { background: linear-gradient(135deg, #ff007f 0%, #7b2ff7 100%); width: 0%; transition: width 1.5s cubic-bezier(0.1, 0, 0.2, 1); }
         .card-glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
         .img-mask { -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 95%); mask-image: linear-gradient(to bottom, black 60%, transparent 95%); }
         .gold-gradient { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
 
-        /* 🚀 修正版 LOGO 只對字體有閃光特效 */
-        .logo-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 300px;
-        }
+        /* LOGO 閃光特效 */
+        .logo-wrapper { position: relative; display: inline-block; width: 300px; }
         @media (min-width: 640px) { .logo-wrapper { width: 500px; } }
         @media (min-width: 768px) { .logo-wrapper { width: 700px; } }
         @media (min-width: 1024px) { .logo-wrapper { width: 850px; } }
-
         .logo-base { width: 100%; height: auto; display: block; }
-
         .logo-shine {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.6) 50%, transparent 75%);
             background-size: 200% 100%;
-            /* 關鍵：讓閃光只出現在 LOGO 圖片有顏色的地方 */
             -webkit-mask-image: url('https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/01%E3%80%90%E7%AF%80%E7%9B%AE%20LOGO%20%E5%8E%BB%E8%83%8C%E6%AA%94%E3%80%91.png');
             mask-image: url('https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/01%E3%80%90%E7%AF%80%E7%9B%AE%20LOGO%20%E5%8E%BB%E8%83%8C%E6%AA%94%E3%80%91.png');
-            -webkit-mask-size: contain; mask-size: contain;
-            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-            animation: move-shine 4s infinite linear;
-            pointer-events: none;
+            -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            animation: move-shine 4s infinite linear; pointer-events: none;
         }
-
-        @keyframes move-shine {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
+        @keyframes move-shine { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
     </style>
 </head>
 <body>
@@ -120,7 +109,7 @@
             <p class="text-gray-100 text-sm md:text-lg mb-12 max-w-3xl mx-auto leading-relaxed font-medium">參與投票意見並留下 SWAG ID，週週加碼抽 <span class="text-pink-500 font-bold border-b border-pink-500 text-lg md:text-xl">3 位贈送 1000 鑽</span></p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch">
-                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
+                <div class="topic-card card-glass p-8 rounded-[2rem]">
                     <h3 class="text-xl font-bold mb-4 topic-title text-white">1. 365元鹽酥雞貴嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Dcard 熱議：請客點了 365 元鹽酥雞被抱怨。是拜金還是小氣？</p>
                     <div class="vote-container">
@@ -135,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
+                <div class="topic-card card-glass p-8 rounded-[2rem]">
                     <h3 class="text-xl font-bold mb-4 topic-title text-white">2. 努力存錢 vs 及時行樂</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">Threads 激辯：趁年輕花錢享受，還是存錢防老？你的選擇是？</p>
                     <div class="vote-container">
@@ -150,7 +139,7 @@
                     </div>
                 </div>
 
-                <div class="topic-card card-glass p-8 rounded-[2rem] md:rounded-[2.5rem]">
+                <div class="topic-card card-glass p-8 rounded-[2rem]">
                     <h3 class="text-xl font-bold mb-4 topic-title text-white">3. 外遇該被無限檢視嗎？</h3>
                     <p class="text-gray-200 text-sm mb-8 leading-relaxed">公眾人物外遇是私事還是活該被檢視？兩大論戰你站哪一邊？</p>
                     <div class="vote-container">
@@ -168,10 +157,28 @@
         </div>
     </section>
 
-    <footer class="bg-black py-12 border-t border-white/5 text-center">
-        <span class="text-gray-300 text-sm md:text-base tracking-widest whitespace-nowrap px-4">亞洲最大成人直播平台</span>
+    <section id="event2" class="relative py-24 md:py-32 bg-event-2 text-center overflow-hidden px-4">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <div class="inline-block border border-orange-400 text-orange-400 px-6 py-1 rounded-full text-xs font-black mb-8 uppercase tracking-widest">活動 2</div>
+            <div class="mb-10"><h2 class="title-clinic text-5xl md:text-7xl font-black italic">沂定有藥醫</h2></div>
+            <div class="card-glass p-10 md:p-14 rounded-[2.5rem] md:rounded-[3.5rem] border-orange-400/20 mb-12 relative text-white text-center">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-black border border-orange-400/50 w-12 h-12 rounded-full flex items-center justify-center text-orange-400 text-xl">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <p class="text-gray-100 text-xl md:text-3xl leading-relaxed italic font-medium">
+                    「你有病，我有藥。<br>私訊陳沂並在開頭註明：<span class="text-orange-400 font-black">「沂定有藥醫 投稿」</span>寫下你的困擾，陳沂將在當周直播現場幫你治腦袋。」
+                </p>
+            </div>
+            <a href="https://swag.live/chat/user/662a4f253a7fe8f3ff7f95f2" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center px-16 py-6 rounded-full gold-gradient text-black font-black text-2xl hover:scale-105 transition shadow-2xl">
+                立即投稿心事
+            </a>
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 border-t border-white/5 text-center px-4">
+        <span class="text-gray-300 text-sm md:text-base tracking-widest whitespace-nowrap">亞洲最大成人直播平台</span>
         <img src="https://pub-b817e22edf6447beb72ee04f1adf2d70.r2.dev/SWAG-Logo-White-1200.png" alt="SWAG" class="h-6 opacity-90 inline-block mx-4">
-        <p class="text-gray-600 text-xs mt-4 uppercase">© 2026 SWAG.LIVE ALL RIGHTS RESERVED.</p>
+        <p class="text-gray-600 text-xs tracking-tighter uppercase mt-4">© 2026 SWAG.LIVE ALL RIGHTS RESERVED.</p>
     </footer>
 
     <div id="modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/95 p-6 text-center">
@@ -187,15 +194,16 @@
         function addToCalendar() {
             const title = encodeURIComponent("SWAG 陳沂直播時間 | 沂派胡言");
             const details = encodeURIComponent("話題女王陳沂正式迴歸！每週四晚間九點準時開播。\n直播連結：https://sw-move.com/8O58U");
-            const startTime = "20260226T210000"; // 2/26 晚上 21:00
-            const endTime = "20260226T223000";   // 預設播 1.5 小時
-            const rrule = encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=TH"); // 每週四重複
-
+            const startTime = "20260226T210000"; 
+            const endTime = "20260226T223000";   
+            const rrule = encodeURIComponent("RRULE:FREQ=WEEKLY;BYDAY=TH");
             const calendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${title}&details=${details}&dates=${startTime}/${endTime}&recur=${rrule}&sf=true&output=xml`;
             window.open(calendarUrl, '_blank');
         }
 
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 });
+        const observer = new IntersectionObserver((entries) => { 
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); }); 
+        }, { threshold: 0.1 });
         document.querySelectorAll('.topic-card').forEach(card => observer.observe(card));
 
         let currentTopic = { id: null, title: "", option: "" };
@@ -211,36 +219,19 @@
             if(swid === "") { alert("請填寫 ID！"); return; }
             const id = currentTopic.id;
             toggleModal();
-
             document.getElementById('vote-ui-' + id).classList.add('hidden');
             document.getElementById('res-' + id).classList.remove('hidden');
-            
             const bar = document.getElementById('bar-' + id);
             const labelLeft = document.getElementById('label-' + id + '-left');
-
-            setTimeout(() => {
-                bar.style.width = '50%';
-                bar.classList.add('animate-pulse');
-                labelLeft.innerText = "真實數據統計中...";
-            }, 100);
+            setTimeout(() => { bar.style.width = '50%'; bar.classList.add('animate-pulse'); labelLeft.innerText = "真實數據統計中..."; }, 100);
 
             const scriptURL = 'https://script.google.com/macros/s/AKfycbx8DH1muzW2TM1Ie5pUi_eQpdRIoRD-2tb43aHMxfWWoQajTW5KFQ5U0nt-pmbyZMvnKA/exec'; 
             const params = new URLSearchParams();
             params.append('swagID', swid); params.append('topic', currentTopic.title); params.append('option', currentTopic.option);
 
             fetch(scriptURL, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: params.toString() })
-            .then(res => res.json())
-            .then(data => {
-                bar.classList.remove('animate-pulse');
-                updateRealUI(id, data.percent1, data.percent2);
-            })
-            .catch(() => {
-                bar.classList.remove('animate-pulse');
-                updateRealUI(id, 65, 35); 
-            });
-
-            alert(`已成功送出！您的 SWAG ID: ${swid}`);
-            document.getElementById('swid').value = "";
+            .then(res => res.json()).then(data => { bar.classList.remove('animate-pulse'); updateRealUI(id, data.percent1, data.percent2); })
+            .catch(() => { bar.classList.remove('animate-pulse'); updateRealUI(id, 65, 35); });
         }
 
         function updateRealUI(id, p1, p2) {
